@@ -18,6 +18,6 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     return;
   }
 
-  const token = generateToken({ id: user.id, username: user.username });
+  const token = generateToken({ id: user.id, username: user.username, role:user.role });
   res.json({ token });
 };

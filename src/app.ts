@@ -7,6 +7,7 @@ import { authenticate } from './middleware/auth.middleware';
 import productRoutes from './routes/product.routes';
 import orderRoutes from './routes/order.routes';
 import authRoutes from './routes/auth.routes';
+import userRoutes from './routes/user.routes';
 
 
 
@@ -22,5 +23,7 @@ app.use('/products', productRoutes);
 app.use('/orders', authenticate, orderRoutes);
 
 app.use('/auth', authRoutes);
+
+app.use('/users', userRoutes);
 
 export default app;
