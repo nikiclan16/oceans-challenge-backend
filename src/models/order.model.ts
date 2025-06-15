@@ -56,3 +56,9 @@ export const getAllOrders = async () => {
   `);
   return result.rows;
 };
+
+export const deleteOrder = async (orderId: number) => {
+  await pool.query('DELETE FROM order_products WHERE order_id = $1', [orderId]);
+  const res = await pool.query('DELETE FROM orders WHERE id = $1 RETURNING *', [orderId]);
+  return res.rows[0];
+};

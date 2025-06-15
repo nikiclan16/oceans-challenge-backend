@@ -28,3 +28,15 @@ export const getOrders = async (_req: Request, res: Response) => {
     res.status(500).json({ error: 'Error al obtener órdenes' });
   }
 };
+
+export const deleteOrder = async (req: Request, res: Response): Promise<void> => {
+  const { id } = req.params;
+
+  const deleted = await OrderModel.deleteOrder(Number(id));
+  if (!deleted) {
+    res.status(404).json({ error: 'Orden no encontrada' });
+    return;
+  }
+
+  res.json({ message: 'Orden eliminada correctamente' });
+};
