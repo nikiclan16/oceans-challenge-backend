@@ -58,3 +58,19 @@ export const deleteProduct = async (req: Request, res: Response): Promise<void> 
 
   res.json(deleted);
 };
+
+export const listPaginatedProducts = async (req: Request, res: Response): Promise<void> => {
+  const limit = parseInt(req.query.limit as string) || 5;
+  const page = parseInt(req.query.page as string) || 1;
+  const offset = (page - 1) * limit;
+
+  const result = await ProductModel.getPaginatedProducts(limit, offset);
+
+  res.json({
+    products: result.data,
+    total: result.total,
+    page,
+    limit,
+    totalPages: Math.ceil(result.total / limit),
+  });
+};
